@@ -12,6 +12,14 @@
     --color-text: #1A1A1A;
     --color-text-light: #718096;
 
+    /* Variables Fonctionnelles (Ajoutées pour corriger les références manquantes) */
+    --color-primary: var(--color-onyx);
+    --color-secondary: var(--color-gold);
+    --color-accent: var(--color-seal);
+    --color-surface: #FFFFFF;
+    
+    --gradient-primary: linear-gradient(135deg, var(--color-gold) 0%, #F4D03F 100%);
+    
     /* Typographie */
     --font-title: 'Montserrat', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -215,11 +223,13 @@ p {
     display: none; /* Caché par défaut */
 }
 
+
 .navbar.scrolled {
     background-color: var(--color-onyx);
     padding: 0.75rem 0;
     box-shadow: var(--shadow-md);
 }
+
 
 .navbar.scrolled .logo-dark {
     display: none; /* On cache le logo noir */
@@ -589,6 +599,8 @@ p {
 .hero-stats {
     display: flex;
     gap: var(--spacing-xl);
+    position: relative;
+    z-index: 10; /* S'assurer que les stats sont au-dessus des éléments flottants */
 }
 
 .stat {
@@ -652,6 +664,7 @@ p {
     color: var(--color-secondary);
     box-shadow: var(--shadow-lg);
     animation: float 6s infinite ease-in-out;
+    z-index: -1; /* Placer derrière le contenu */
 }
 
 .floating-element.el-1 {

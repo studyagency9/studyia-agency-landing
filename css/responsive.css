@@ -355,6 +355,7 @@
         text-align: center;
     }
     
+    
     .menu-toggle {
         display: block;
     }
@@ -691,63 +692,234 @@
     }
 }
 
-/* Mode sombre préféré */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-primary: #FFFFFF;
-        --color-background: #0A0A0A;
-        --color-surface: #1A1A1A;
-        --color-text: #E2E8F0;
-        --color-text-light: #A0AEC0;
-    }
+/* Mode sombre via classe (géré par JS) */
+:root body.dark-mode {
+    /* Variables re-définies au niveau root pour héritage global */
+    --color-onyx: #F5F5F5;        /* Devient blanc pour les titres */
+    --color-sand: #121212;        /* Devient sombre pour les arrière-plans */
+    --color-background: #050505;  /* Fond très sombre */
+    --color-surface: #1E1E1E;     /* Surface des cartes */
+    --color-text: #E2E8F0;        /* Texte principal clair */
+    --color-text-light: #A0AEC0;  /* Texte secondaire */
+    --color-gold: #D4AF37;        /* Garde la couleur or */
+    --color-primary: #D4AF37;     /* Utilise or comme couleur primaire */
+    --color-secondary: #F5F5F5;   /* Blanc comme secondaire */
     
-    .navbar {
-        background: rgba(10, 10, 10, 0.95);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .logo-text {
-        color: var(--color-primary);
-    }
-    
-    .hamburger {
-        display: block;
-        width: 24px;
-        height: 2px;
-        background: var(--color-onyx); /* Noir par défaut */
-        position: relative;
-        transition: background var(--transition-fast);
-    }
-    
-    .navbar.scrolled .hamburger {
-        background: var(--color-background); /* Blanc sur fond sombre */
-    }
-    
-    .nav-link {
-        color: var(--color-text);
-    }
-    
-    .hero {
-        background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
-    }
-    
-    .service-card,
-    .project-card {
-        background: var(--color-surface);
-        border-color: rgba(255, 255, 255, 0.05);
-    }
-    
-    .projects {
-        background: #0A0A0A;
-    }
-    
-    .contact {
-        background: #000000;
-    }
-    
-    .footer {
-        background: #000000;
-    }
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.8);
+}
+
+body.dark-mode {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+body.dark-mode .navbar, 
+body.dark-mode .navbar.scrolled {
+    background-color: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .nav-menu {
+    background-color: #1a1a1a;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .nav-link {
+    color: var(--color-text);
+}
+
+body.dark-mode .hamburger, 
+body.dark-mode .hamburger::before, 
+body.dark-mode .hamburger::after {
+    background: #FFFFFF;
+}
+
+body.dark-mode .services, 
+body.dark-mode .products, 
+body.dark-mode .team, 
+body.dark-mode .why-us, 
+body.dark-mode .about, 
+body.dark-mode .contact, 
+body.dark-mode .projects {
+    background-color: var(--color-background);
+}
+
+body.dark-mode .why-us, 
+body.dark-mode .team {
+    background-color: var(--color-sand);
+}
+
+body.dark-mode .service-card, 
+body.dark-mode .product-card, 
+body.dark-mode .team-card, 
+body.dark-mode .project-card, 
+body.dark-mode .why-us .feature, 
+body.dark-mode .modal-content, 
+body.dark-mode .profile-card {
+    background-color: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+}
+
+body.dark-mode .service-card:hover, 
+body.dark-mode .product-card:hover, 
+body.dark-mode .team-card:hover, 
+body.dark-mode .project-card:hover {
+    background-color: #252525;
+    border-color: var(--color-gold);
+}
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode h4, 
+body.dark-mode h5, 
+body.dark-mode h6,
+body.dark-mode .hero-title, 
+body.dark-mode .section-title, 
+body.dark-mode .product-title, 
+body.dark-mode .service-title, 
+body.dark-mode .project-title,
+body.dark-mode .stat-number, 
+body.dark-mode .stat-label,
+body.dark-mode .card-name, 
+body.dark-mode .modal-name, 
+body.dark-mode .feature h4 {
+    color: var(--color-onyx);
+}
+
+body.dark-mode p,
+body.dark-mode .hero-description,
+body.dark-mode .service-description,
+body.dark-mode .product-description,
+body.dark-mode .section-description {
+    color: var(--color-text);
+}
+
+body.dark-mode .text-gradient {
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+body.dark-mode input, 
+body.dark-mode textarea, 
+body.dark-mode select {
+    background-color: #2A2A2A;
+    color: white;
+    border: 1px solid #444;
+}
+
+body.dark-mode input::placeholder, 
+body.dark-mode textarea::placeholder {
+    color: #888;
+}
+
+body.dark-mode .footer {
+    background-color: #000000;
+    border-top: 1px solid #222;
+    color: var(--color-text);
+}
+
+body.dark-mode .footer-column h4 {
+    color: white;
+}
+
+body.dark-mode .contact {
+    background-color: #000000;
+    color: var(--color-text);
+}
+
+body.dark-mode .contact .section-subtitle {
+    color: var(--color-gold);
+}
+
+body.dark-mode .contact .section-description,
+body.dark-mode .contact-info .info-content p {
+    color: var(--color-text-light);
+}
+
+body.dark-mode .team-modal {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+body.dark-mode .close-modal {
+    color: white;
+}
+
+body.dark-mode .btn-primary {
+    color: #1A1A1A;
+}
+
+body.dark-mode .btn-secondary {
+    border-color: white;
+    color: white;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background-color: white;
+    color: black;
+}
+
+body.dark-mode .btn-outline {
+    color: var(--color-text);
+    border-color: var(--color-gold);
+}
+
+body.dark-mode .btn-outline:hover {
+    color: #1A1A1A;
+}
+
+body.dark-mode .profile-header, 
+body.dark-mode .profile-footer {
+    background-color: #000000;
+    color: var(--color-text);
+}
+
+body.dark-mode .navbar.scrolled .nav-link {
+    color: var(--color-text);
+}
+
+body.dark-mode .navbar.scrolled .hamburger,
+body.dark-mode .navbar.scrolled .hamburger::before,
+body.dark-mode .navbar.scrolled .hamburger::after {
+    background: #FFFFFF;
+}
+
+body.dark-mode .logo-dark {
+    display: none !important;
+}
+
+body.dark-mode .logo-light {
+    display: block !important;
+}
+
+body.dark-mode .navbar.scrolled .logo-light {
+    display: block !important;
+}
+
+body.dark-mode .diagonal-divider polygon {
+    fill: #000000 !important;
+}
+
+body.dark-mode .diagonal-divider {
+    background-color: #000000;
+}
+
+body.dark-mode .card-image {
+    background-color: #2A2A2A;
+}
+
+body.dark-mode .wave-divider {
+    color: var(--color-background);
+}
+
+body.dark-mode .btn-nav {
+    color: #1A1A1A !important;
+}
+
+body.dark-mode .loader {
+    background-color: #000000;
 }
 
 /* Impression */

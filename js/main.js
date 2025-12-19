@@ -49,6 +49,43 @@ function initLoader() {
 }
 
 /**
+ * Gestion du Thème (Dark/Light Mode)
+ */
+function initTheme() {
+    // 1. Détecter le thème système
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    
+    // 2. Déterminer le thème à appliquer
+    let shouldBeDark = false;
+    if (savedTheme) {
+        shouldBeDark = savedTheme === 'dark';
+    } else {
+        shouldBeDark = systemPrefersDark;
+    }
+
+    // 3. Appliquer le thème
+    if (shouldBeDark) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+
+    // 4. Écouter les changements du thème système
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        // Ne changer que si aucune préférence n'est sauvegardée
+        if (!localStorage.getItem('theme')) {
+            const systemDark = e.matches;
+            if (systemDark) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        }
+    });
+}
+
+/**
  * Navigation responsive
  */
 function initNavigation() {
